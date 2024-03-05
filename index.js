@@ -1,6 +1,6 @@
+import mongoose from "mongoose";
 import express, { urlencoded } from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 import upload from "./module/upload.js";
 import multer from "multer";
 import File from "./module/file.js"
@@ -13,7 +13,14 @@ dotenv.config();
 // import joi from "jo"
 
 multer({dest:"static/img"});
+try {
+    mongoose.set('strictQuery',false)
 
+    await mongoose.connect("mongodb+srv://jamshid14092002:3tGLCosvg3eKCyX8@cluster0.miks1ok.mongodb.net/?retryWrites=true&w=majority", {});
+        console.log(`ulanish bajarildi`)
+} catch (error) {
+    console.log("Mongodbda ulanishda xatolik mavjud", error)
+}
 const app = express();
 app.use(urlencoded({extended:true}));
 app.use(cors());
@@ -61,23 +68,11 @@ app.post("/login",(req, res)=>{
 
 })
 
-async function ulanish (){
-    try {
-        mongoose.set('strictQuery',false)
-
-        await mongoose.connect("mongodb+srv://jamshid14092002:3tGLCosvg3eKCyX8@cluster0.miks1ok.mongodb.net/?retryWrites=true&w=majority", {});
-        
-    } catch (error) {
-        console.log("Mongodbda ulanishda xatolik mavjud", error)
-    }
-};
-ulanish()
-
-
+    
 
 app.listen(process.env.PORT,()=>{
-    console.log("Hammasi joyida");
-    console.log("delete/url method delete");
-    console.log("/login"," login1 password1");;
-    console.log("-x-token, fayll")
-})
+console.log("Hammasi joyida");
+console.log("delete/url method delete");
+console.log("/login"," login1 password1");;
+console.log("-x-token, fayll")
+});
