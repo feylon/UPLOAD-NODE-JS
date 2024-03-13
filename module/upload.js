@@ -17,7 +17,7 @@ let stroge = multer.diskStorage({
 
 let upload = multer({
     fileFilter:(req,file,cb)=>{
-        cb(null,true);
+        cb(null,true);    
     },
     storage:stroge
 });

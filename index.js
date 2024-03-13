@@ -15,8 +15,8 @@ dotenv.config();
 multer({dest:"static/img"});
 try {
     mongoose.set('strictQuery',false)
-
-    await mongoose.connect("mongodb+srv://jamshid14092002:3tGLCosvg3eKCyX8@cluster0.miks1ok.mongodb.net/?retryWrites=true&w=majority", {});
+    await mongoose.connect("mongodb://localhost/fayllar")
+    // await mongoose.connect("mongodb+srv://jamshid14092002:3tGLCosvg3eKCyX8@cluster0.miks1ok.mongodb.net/?retryWrites=true&w=majority", {});
         console.log(`ulanish bajarildi`)
 } catch (error) {
     console.log("Mongodbda ulanishda xatolik mavjud", error)
@@ -59,6 +59,7 @@ app.post("/login",(req, res)=>{
         login:"Jamshid",
         password:"feylon1409"
     };
+    console.log(req.ip)
     const {login1, password1} = req.body;
     if(!(login == login1 && password == password1))
     return res.status(400).send("Parol xato");
